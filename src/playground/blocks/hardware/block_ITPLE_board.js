@@ -90,7 +90,7 @@ Entry.ITPLE.setLanguage = function () {
                 ITPLE_get_digital_value: '디지털 %1 번 값',
                 ITPLE_value_mapping: '%1 의 범위를 %2 ~ %3 에서 %4 ~ %5 로 바꾼 값',
                 ITPLE_get_ultrasonic_value: '초음파센서 Trig %1 Echo %2 값',
-                ITPLE_toggle_led: '디지털 %1 번 핀 %2 %3',
+                ITPLE_toggle_led: '테스트 중 !!!! 디지털 %1 번 핀 %2 %3',
                 ITPLE_digital_pwm: '디지털 %1 번 핀을 %2 (으)로 정하기 %3',
                 ITPLE_set_tone: '디지털 %1 번 핀의 버저를 %2 %3 음으로 %4 초 연주하기 %5',
                 ITPLE_get_digital: '디지털 %1 번 센서값',
