@@ -91,6 +91,7 @@ Entry.ITPLE.setLanguage = function () {
                 ITPLE_value_mapping: '%1 의 범위를 %2 ~ %3 에서 %4 ~ %5 로 바꾼 값',
                 ITPLE_get_ultrasonic_value: '초음파센서 Trig %1 Echo %2 값',
                 ITPLE_toggle_led: '테스트 중 !!!! 디지털 %1 번 핀 %2 %3',
+                ITPLE_turn_led: '%1 LED %2 %3',
                 ITPLE_digital_pwm: '디지털 %1 번 핀을 %2 (으)로 정하기 %3',
                 ITPLE_set_tone: '디지털 %1 번 핀의 버저를 %2 %3 음으로 %4 초 연주하기 %5',
                 ITPLE_get_digital: '디지털 %1 번 센서값',
@@ -110,6 +111,7 @@ Entry.ITPLE.setLanguage = function () {
                 ITPLE_value_mapping: 'Map Value %1 %2 ~ %3 to %4 ~ %5',
                 ITPLE_get_ultrasonic_value: 'Read ultrasonic sensor trig pin %1 echo pin %2',
                 ITPLE_toggle_led: 'Digital %1 Pin %2 %3',
+                ITPLE_turn_led: '%1 LED %2 %3',
                 ITPLE_digital_pwm: 'Digital %1 Pin %2 %3',
                 ITPLE_set_tone: 'Play tone pin %1 on note %2 octave %3 beat %4 %5',
                 ITPLE_get_digital: 'Digital %1 Sensor value',
@@ -132,6 +134,7 @@ Entry.ITPLE.blockMenuBlocks = [
     'ITPLE_get_ultrasonic_value',
     'ITPLE_get_digital',
     'ITPLE_toggle_led',
+    'ITPLE_turn_led',
     'ITPLE_digital_pwm',
     'ITPLE_set_tone',
     'ITPLE_set_motor_direction',
@@ -747,6 +750,102 @@ Entry.ITPLE.getBlocks = function () {
                     },
                 ],
                 ar: [{syntax: 'digitalWrite(%1, %2);'}]
+            },
+        },
+        ITPLE_turn_led: { // 저학년 학생을 위한, 핀 번호 없는 LED 켜기 블록
+            color: EntryStatic.colorSet.block.default.HARDWARE,
+            outerLine: EntryStatic.colorSet.block.darken.HARDWARE,
+            fontColor: '#fff',
+
+            skeleton: 'basic',
+
+            params: [
+                {
+                    type: 'Dropdown',
+                    options: [
+                        ['빨강', 10],
+                        ['파랑', 11],
+                    ],
+                    value: 10,
+                    fontSize: 11,
+                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                },
+                {
+                    type: 'Dropdown',
+                    options: [
+                        ['켜기', 'on'],
+                        ['끄기', 'off'],
+                    ],
+                    value: 'on',
+                    fontSize: 11,
+                    bgColor: EntryStatic.colorSet.block.darken.HARDWARE,
+                    arrowColor: EntryStatic.colorSet.arrow.default.HARDWARE,
+                },
+                {
+                    type: 'Indicator',
+                    img: 'block_icon/hardware_icon.svg',
+                    size: 12,
+                },
+            ],
+
+            events: {},
+
+            def: {
+                params: [
+                    null,
+                ],
+                type: 'ITPLE_turn_led',
+            },
+
+            paramsKeyMap: {
+                PORT: 0,
+                VALUE: 1,
+            },
+            class: 'ITPLE',
+            isNotFor: ['ITPLE'],
+            func(sprite, script) {
+                const port = script.getNumberValue('PORT');
+                let value = script.getValue('VALUE');
+
+                if (typeof value === 'string') {
+                    value = value.toLowerCase();
+                }
+                if (Entry.ITPLE.highList.indexOf(value) > -1) {
+                    value = 255;
+                } else if (Entry.ITPLE.lowList.indexOf(value) > -1) {
+                    value = 0;
+                } else {
+                    throw new Error();
+                }
+                if (!Entry.hw.sendQueue.SET) {
+                    Entry.hw.sendQueue.SET = {};
+                }
+                Entry.hw.sendQueue.SET[port] = {
+                    type: Entry.ITPLE.sensorTypes.DIGITAL,
+                    data: value,
+                    time: new Date().getTime(),
+                };
+                return script.callReturn();
+            },
+            syntax: {
+                js: [],
+                py: [
+                    {
+                        syntax: 'Arduino.digitalWrite(%1, %2)',
+                        textParams: [
+                            {
+                                type: 'Block',
+                                accept: 'string',
+                            },
+                            {
+                                type: 'Block',
+                                accept: 'string',
+                            },
+                        ],
+                    },
+                ],
+                ar: [{syntax: 'digitalWrite(%1,%2);'}]
             },
         },
         ITPLE_digital_pwm: {
