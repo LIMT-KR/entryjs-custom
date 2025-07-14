@@ -369,11 +369,11 @@ Entry.ITPLE.getBlocks = function () {
             js : [],
             py : [
                 {
-                syntax : 'Arduino.digitalRead(%1)',
+                syntax : 'Arduino.digitalRead(%1)==0',
                 },
             ],
             ar: [{
-                syntax : 'digitalRead(%1)'
+                syntax : 'digitalRead(%1)==0'
             }]
         },
     },
