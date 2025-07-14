@@ -340,21 +340,23 @@ Entry.ITPLE.getBlocks = function () {
             const analogPortData = Entry.hw.portData.ANALOG;
             const digitalPortData = Entry.hw.portData.DIGITAL;
 
+            let value;
+
             switch (seletedKey) {
                 case 'A0':{
-                    const value = analogPortData ? analogPortData[0] : 1;
+                    value = analogPortData ? analogPortData[0] : 1;
                     break;
                 }
                 case 'A1':{
-                    const value = analogPortData ? analogPortData[1] : 1;
+                    value = analogPortData ? analogPortData[1] : 1;
                     break;
                 }
                 case '8': {
-                    const value = digitalPortData ? digitalPortData[8] : 1;
+                    value = digitalPortData ? digitalPortData[8] : 1;
                     break;
                 }
                 case '7': {
-                    const value = digitalPortData ? digitalPortData[7] : 1;
+                    value = digitalPortData ? digitalPortData[7] : 1;
                     break;
                 }
                 default:
