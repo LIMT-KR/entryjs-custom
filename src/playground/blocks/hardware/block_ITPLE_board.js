@@ -431,7 +431,7 @@ Entry.ITPLE.getBlocks = function () {
                 },
             ],
             ar: [{
-                syntax: 'Arduino.analogRead(2) > %1'
+                syntax: 'analogRead(2) > %1'
             },],
         },
     },
