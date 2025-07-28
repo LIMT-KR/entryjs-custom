@@ -93,11 +93,11 @@ Entry.ITPLE.setLanguage = function () {
         ITPLE_get_sensor_value: '%1 센서 값',
         ITPLE_get_ultrasonic_value: '초음파 센서 값',
         ITPLE_is_key_pressed: '%1 키가 눌러져 있는가?',
-        ITPLE_value_sensor: '%1 센서 값이 %2보다 %3?',
+        ITPLE_value_sensor: '%1 센서 값이 %2보다 %3',
         ITPLE_turn_led: '%1 LED %2 %3',
         ITPLE_set_tone: '버저를 %1 %2 음으로 %3 초 연주하기 %4',
         ITPLE_set_motor_direction: '%1 모터 %2 방향으로 정하기 %3',
-        ITPLE_set_motor_speed: '%1 모터 %2 속도로  정하기 %3',
+        ITPLE_set_motor_speed: '%1 모터 %2 빠르기로  정하기 %3',
         ITPLE_set_servo: '%1 의 서보모터를 %2 도로 정하기 %3'
       }
     },
